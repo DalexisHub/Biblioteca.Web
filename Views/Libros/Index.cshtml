@@ -1,0 +1,19 @@
+@model IReadOnlyList<Libro>
+@{ ViewData["Title"] = "Catálogo de libros"; var busqueda = ViewData["Busqueda"] as string; }
+<section class="hero">
+ <div><span class="eyebrow">LA COLECCIÓN · BIBLIOTECA VIVA</span><h1>Historias que<br />siguen <em>vivas.</em></h1><p>Encuentra el próximo libro. Dale lugar a una nueva historia.</p><a class="button light" asp-action="Create">+ Registrar libro</a></div>
+ <div class="hero-books" aria-hidden="true"><div class="spine mint">UN MUNDO<span>por descubrir</span></div><div class="spine yellow">Entre líneas<span>BIBLIOTECA VIVA</span></div><div class="spine coral-bg">OTRA HISTORIA<span>empieza aquí</span></div><div class="spine cream">Leer nos une<span>VOL. 08</span></div></div>
+</section>
+<div class="section-heading"><div><span class="eyebrow">EXPLORA TU BIBLIOTECA</span><h2>Catálogo de libros <span class="count">@Model.Count</span></h2></div><span class="badge mint">Colección activa</span></div>
+<form method="get" class="searchbar" role="search">
+ <label for="titulo">Buscar por título</label><div class="search-controls"><input id="titulo" name="titulo" value="@busqueda" maxlength="200" placeholder="¿Qué historia estás buscando?" /><button class="button" type="submit">Buscar <span aria-hidden="true">↗</span></button>@if (!string.IsNullOrEmpty(busqueda)) { <a class="text-link" asp-action="Index">Limpiar</a> }</div>
+</form>
+<div asp-validation-summary="All" class="validation" role="alert"></div>
+@if (ViewData.ModelState.IsValid)
+{
+@if (!string.IsNullOrEmpty(busqueda)) { <p class="muted">Resultados para «@busqueda»</p> }
+@if (Model.Count == 0)
+{ <section class="empty"><span class="empty-symbol" aria-hidden="true">▤</span><h3>@(string.IsNullOrEmpty(busqueda) ? "Un catálogo por descubrir" : "No encontramos ese título")</h3><p>@(string.IsNullOrEmpty(busqueda) ? "Registra el primer libro para empezar a compartir historias." : "Prueba con una parte del título o consulta toda la colección.")</p><a class="text-link" asp-action="@(string.IsNullOrEmpty(busqueda) ? "Create" : "Index")">@(string.IsNullOrEmpty(busqueda) ? "Registrar un libro →" : "Ver toda la colección →")</a></section> }
+else
+{ <div class="table-wrap"><table><thead><tr><th scope="col">Libro / autor</th><th scope="col">ISBN</th><th scope="col">Ejemplares</th><th scope="col">Acciones</th></tr></thead><tbody>@foreach (var libro in Model) { <partial name="_LibroFila" model="libro" /> }</tbody></table></div><p class="table-note">@Model.Count libro(s) en esta selección · Cada libro, una posibilidad.</p> }
+}

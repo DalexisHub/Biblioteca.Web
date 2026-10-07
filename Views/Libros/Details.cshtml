@@ -1,0 +1,5 @@
+@model Libro
+@{ ViewData["Title"] = Model.Titulo; }
+<a class="back-link" asp-action="Index">← Volver al catálogo</a>
+<div class="section-heading"><div><span class="eyebrow">CATÁLOGO / FICHA DEL LIBRO</span><h1>De cerca<span class="coral">.</span></h1></div><span class="badge mint">Libro activo</span></div>
+<section class="detail-panel"><div class="detail-cover cover-@(Model.LibroId % 4)"><span>BIBLIOTECA VIVA</span><h2>@Model.Titulo</h2><p>@Model.AutorNombre</p><span>COLECCIÓN · @Model.LibroId.ToString("D3")</span></div><div class="detail-copy"><span class="eyebrow">UNA HISTORIA EN TU COLECCIÓN</span><h2>@Model.Titulo</h2><p class="detail-author">@Model.AutorNombre</p><dl><div><dt>ISBN</dt><dd>@Model.ISBN</dd></div><div><dt>Ejemplares disponibles</dt><dd>@Model.Ejemplares</dd></div></dl><div class="form-actions"><a class="button" asp-action="Edit" asp-route-id="@Model.LibroId">Editar ficha ↗</a><a class="danger-link" asp-action="Delete" asp-route-id="@Model.LibroId">Dar de baja</a></div></div></section>

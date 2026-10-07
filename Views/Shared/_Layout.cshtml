@@ -1,0 +1,33 @@
+@{ var section = ViewContext.RouteData.Values["controller"]?.ToString(); }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+ <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>@ViewData["Title"] · Biblioteca Viva</title>
+ <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+ <a class="skip" href="#contenido">Saltar al contenido</a>
+ <aside class="sidebar">
+  <a class="brand" asp-controller="Libros" asp-action="Index"><span class="brand-mark" aria-hidden="true">b<span>v</span></span><span>Biblioteca<strong>Viva<span class="coral">.</span></strong></span></a>
+  <p class="nav-caption">TU ESPACIO DE LECTURA</p>
+  <nav aria-label="Navegación principal">
+   <a class="@(section == "Libros" ? "selected" : "")" aria-current="@(section == "Libros" ? "page" : null)" asp-controller="Libros" asp-action="Index"><span aria-hidden="true">▤</span> Catálogo de libros <small>01</small></a>
+   <a class="@(section == "Socios" ? "selected" : "")" aria-current="@(section == "Socios" ? "page" : null)" asp-controller="Socios" asp-action="Index"><span aria-hidden="true">◎</span> Socios <small>02</small></a>
+   <a class="@(section == "Prestamos" ? "selected" : "")" aria-current="@(section == "Prestamos" ? "page" : null)" asp-controller="Prestamos" asp-action="Reporte"><span aria-hidden="true">▥</span> Reporte de préstamos <small>03</small></a>
+  </nav>
+  <div class="sidebar-note"><span class="eyebrow">ENTRE PÁGINAS</span><p>Las buenas historias<br />nos encuentran aquí.</p><div class="mini-spines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div></div>
+  <div class="sidebar-footer">BIBLIOTECA VIVA <span>ED. 08</span></div>
+ </aside>
+ <div class="workspace">
+  <header class="topbar"><span>Un lugar para cada historia.</span><span class="edition">GESTIÓN DE BIBLIOTECA <b>BV</b></span></header>
+  <main id="contenido">
+   @if (TempData["Exito"] is string mensaje) { <div class="notice success" role="status"><strong>Listo.</strong> @mensaje</div> }
+   @RenderBody()
+  </main>
+  <footer class="page-footer"><span>Hecha para compartir historias.</span><span>Biblioteca Viva © @DateTime.Now.Year</span></footer>
+ </div>
+ <script src="~/lib/jquery/dist/jquery.min.js"></script>
+ @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,10 @@
+@model Socio
+@{ ViewData["Title"] = "Registrar socio"; }
+<a class="back-link" asp-action="Index">← Volver a socios</a>
+<div class="section-heading"><div><span class="eyebrow">COMUNIDAD / NUEVO SOCIO</span><h1>Siempre hay lugar para uno más<span class="coral">.</span></h1><p class="muted">Dale la bienvenida a un nuevo lector.</p></div></div>
+<div class="form-layout"><section class="panel"><form asp-action="Create" method="post"><div asp-validation-summary="All" class="validation" role="alert"></div>
+<div class="field"><label asp-for="Nombre">Nombre completo</label><input asp-for="Nombre" maxlength="150" autocomplete="name" /><span asp-validation-for="Nombre"></span></div>
+<div class="field"><label asp-for="DNI"></label><input asp-for="DNI" maxlength="15" /><span asp-validation-for="DNI"></span><small>Debe ser único en la biblioteca.</small></div>
+<div class="field"><label asp-for="Email"></label><input asp-for="Email" maxlength="150" autocomplete="email" /><span asp-validation-for="Email"></span></div>
+<div class="form-actions"><button class="button" type="submit">Registrar socio ↗</button><a class="button secondary" asp-action="Index">Cancelar</a></div></form></section><aside class="editorial-note mint"><span class="eyebrow">NUEVAS CONEXIONES</span><h2>Leer también<br />es compartir.</h2><p>Una comunidad se construye una historia a la vez.</p><p>Completa todos los campos para registrar al socio.</p><span class="note-number">02 / BV</span></aside></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

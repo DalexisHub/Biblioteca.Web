@@ -1,0 +1,9 @@
+@model Libro
+@{ ViewData["Title"] = "Una nueva historia"; }
+<a class="back-link" asp-action="Index">← Volver al catálogo</a>
+<div class="section-heading"><div><span class="eyebrow">CATÁLOGO / NUEVO LIBRO</span><h1>Una nueva historia<span class="coral">.</span></h1><p class="muted">Añade un libro a la colección y abre nuevas posibilidades.</p></div></div>
+<div class="form-layout"><section class="panel"><form asp-action="Create" asp-route-id="@(Model.LibroId == 0 ? null : Model.LibroId)" method="post">
+<input type="hidden" asp-for="LibroId" /><partial name="_Formulario" model="Model" />
+<div class="form-actions"><button class="button" type="submit">Registrar libro ↗</button><a class="button secondary" asp-action="Index">Cancelar</a></div>
+</form></section><aside class="editorial-note yellow"><span class="eyebrow">FICHA DE CATÁLOGO</span><h2>Un libro.<br />Muchas vidas.</h2><p>El título, su autor y el ISBN nos ayudan a encontrar cada historia.</p><p>Todos los campos son obligatorios. Puedes registrar cero ejemplares.</p><span class="note-number">01 / BV</span></aside></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

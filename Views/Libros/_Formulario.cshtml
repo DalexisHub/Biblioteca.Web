@@ -1,0 +1,5 @@
+@model Libro
+<div asp-validation-summary="All" class="validation" role="alert"></div>
+<div class="field"><label asp-for="Titulo"></label><input asp-for="Titulo" maxlength="200" placeholder="El título de una nueva historia" /><span asp-validation-for="Titulo"></span></div>
+<div class="form-grid"><div class="field"><label asp-for="ISBN"></label><input asp-for="ISBN" maxlength="20" placeholder="Ej. 978-0307474728" /><span asp-validation-for="ISBN"></span></div><div class="field"><label asp-for="Ejemplares"></label><input asp-for="Ejemplares" min="0" /><span asp-validation-for="Ejemplares"></span></div></div>
+<div class="field"><label asp-for="AutorId"></label><select asp-for="AutorId" asp-items='@(ViewData["Autores"] as Microsoft.AspNetCore.Mvc.Rendering.SelectList)'><option value="">Selecciona un autor activo</option></select><span asp-validation-for="AutorId"></span><small>Solo aparecen los autores activos de tu biblioteca.</small></div>

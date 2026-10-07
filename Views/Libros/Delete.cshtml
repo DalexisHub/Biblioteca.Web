@@ -1,0 +1,5 @@
+@model Libro
+@{ ViewData["Title"] = "Dar de baja"; }
+<a class="back-link" asp-action="Index">← Volver al catálogo</a>
+<div class="section-heading"><div><span class="eyebrow">CATÁLOGO / BAJA LÓGICA</span><h1>Una pausa en el estante<span class="coral">.</span></h1></div></div>
+<section class="panel narrow"><span class="badge yellow">Confirmación de baja</span><h2>@Model.Titulo</h2><p class="muted">@Model.AutorNombre · @Model.ISBN</p><p>El libro dejará de aparecer en el catálogo activo. Su ficha y su historial de préstamos se conservarán.</p><p>Si tiene préstamos pendientes, deberás resolverlos antes de darlo de baja.</p><form asp-action="Delete" asp-route-id="@Model.LibroId" method="post"><div asp-validation-summary="All" class="validation" role="alert"></div><input type="hidden" name="id" value="@Model.LibroId" /><div class="form-actions"><button class="button danger" type="submit">Confirmar baja</button><a class="button secondary" asp-action="Index">Conservar libro</a></div></form></section>

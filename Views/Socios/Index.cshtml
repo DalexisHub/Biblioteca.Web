@@ -1,0 +1,6 @@
+@model IReadOnlyList<Socio>
+@{ ViewData["Title"] = "Socios"; }
+<div class="section-heading"><div><span class="eyebrow">LA COMUNIDAD · BIBLIOTECA VIVA</span><h1>Lectores que conectan<span class="coral">.</span></h1><p class="muted">Detrás de cada préstamo hay alguien por descubrir una historia.</p></div><a class="button" asp-action="Create">+ Registrar socio</a></div>
+<div class="section-heading"><h2>Nuestros socios <span class="count">@Model.Count</span></h2><span class="badge mint">Socios activos</span></div>
+@if (Model.Count == 0) { <section class="empty"><span class="empty-symbol" aria-hidden="true">◎</span><h3>La comunidad empieza contigo</h3><p>Registra un socio para darle la bienvenida a la biblioteca.</p><a class="text-link" asp-action="Create">Registrar socio →</a></section> }
+else { <div class="table-wrap"><table><thead><tr><th scope="col">Socio</th><th scope="col">DNI</th><th scope="col">Correo electrónico</th><th scope="col">Estado</th></tr></thead><tbody>@foreach (var socio in Model) { <tr><td><div class="book-cell"><span class="avatar" aria-hidden="true">@(string.IsNullOrEmpty(socio.Nombre) ? "S" : socio.Nombre[..1])</span><strong>@socio.Nombre</strong></div></td><td>@socio.DNI</td><td><a href="mailto:@socio.Email">@socio.Email</a></td><td><span class="badge mint">Activo</span></td></tr> }</tbody></table></div> }
